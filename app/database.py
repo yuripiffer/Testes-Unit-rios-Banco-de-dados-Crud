@@ -11,7 +11,9 @@ class DataBase:
 
     def create_connection_and_cursor(self, db_name: str = "") -> None:
         """
-        Cria a conexão com o banco de dados (MySQL) e o cursor.
+        Cria a conexão com o banco de dados e o cursor.
+        Método que permite a troca da conexão (portanto, não simultânea)
+        utilizando o mesmo objeto DataBase
         :param db_name: str, nome do banco de dados.
         :return: None
         """
@@ -71,6 +73,7 @@ class DataBase:
             else:
                 converted_to_sql_data.append(f"{key} = {value}")
         string_values = f"{separator}".join(converted_to_sql_data)
+        print(string_values)
         return string_values
 
 
@@ -163,7 +166,8 @@ class DataBase:
 
 db = DataBase()
 db.create_connection_and_cursor("hoteis_regioes")
-db.crud_update("cidades", 12, dict(cidade="Santo Antonio da Platina"))
+#db.crud_update("cidades", 12, dict(cidade="Santo Antonio da Platina"))
+#db.convert_dict_to_sql_string(dict(lala=1, lola=2), separator= " and ")
 # table_to_update = "cidades"
 
 # db.crud_read("cidades")
