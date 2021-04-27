@@ -9,7 +9,6 @@ PORT = 3306
 
 class DataBase:
 
-    #OK
     def create_connection_and_cursor(self, db_name: str = "") -> None:
         """
         Cria a conexão com o banco de dados e o cursor.
@@ -22,7 +21,6 @@ class DataBase:
         self.conn.autocommit(True)
         self.cursor = self.conn.cursor()
 
-    #OK
     def conn_and_cursor_exist(self) -> bool:
         """
         Avalia se a conexão e o cursor foram criados.
@@ -36,7 +34,6 @@ class DataBase:
         except AttributeError:
             return False
 
-    #OK
     def is_database_selected(self) -> bool:
         try:
             self.cursor.execute("CREATE TABLE temp_table (teste varchar(1))")
@@ -45,7 +42,6 @@ class DataBase:
         except Exception:
             return False
 
-    #OK
     def change_current_database(self, new_database_name: str) -> None:
         """
         Muda a tabela para
@@ -54,7 +50,6 @@ class DataBase:
         """
         self.conn.select_db(new_database_name)
 
-    #FAZERRRRR
     def up_to_table_is_ok(self, table:str):
         if not self.conn_and_cursor_exist():
             raise Exception("Connection or cursor is not defined!")
@@ -91,6 +86,7 @@ class DataBase:
         string_values = f"{separator}".join(converted_to_sql_data)
         print(string_values)
         return string_values
+
 
     #FAZER
     def finds_pk_table_name(self, table):
@@ -178,12 +174,12 @@ class DataBase:
             return False
         return False
 
-# db = DataBase()
-# db.create_connection_and_cursor("hoteis_regioes")
+db = DataBase()
+db.create_connection_and_cursor("hoteis_regioes")
 # print(db.crud_read("hoteis"))
 # db.crud_delete("cidades", dict(id_cidade=3))
 #db.crud_update("cidades", 12, dict(cidade="Santo Antonio da Platina"))
-#db.convert_dict_to_sql_string(dict(lala=1, lola=2), separator= " and ")
+db.convert_dict_to_sql_string(dict(nome="Ana Maria", idade= 25, nasc="2021-05-02", casado=0), separator=" , ")
 # table_to_update = "cidades"
 
 # db.crud_read("cidades")
